@@ -14,11 +14,13 @@ module SwitchPoint
     end
 
     def checkout(name)
-      proxies[name] ||= Proxy.new(name)
+      key = "#{name}_#{Thread.main.object_id}"
+      proxies[key] ||= Proxy.new(name)
     end
 
     def find(name)
-      proxies.fetch(name)
+      key = "#{name}_#{Thread.main.object_id}"
+      proxies.fetch(key)
     end
 
     def proxies
